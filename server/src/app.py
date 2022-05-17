@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, g, Blueprint
+from flask import Flask, request, jsonify, g,Blueprint
 from v1.dog.router import DogRouter
 from v1.cat.router import CatRouter
 from v1.auth import login as auth_login, verify_token as auth_verify_token
@@ -65,4 +65,4 @@ def cat(cat_id):
     return jsonify(cat)
 """
 if __name__ == "__main__":
-    app.run(debug=True,host='127.0.0.1',port=6000)
+    app.run(debug=True,host='0.0.0.0',port=6000)
