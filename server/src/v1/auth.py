@@ -20,14 +20,15 @@ def verify_token(token):
 def login(username, password):
     # TODO: use the database to verify the username and password
     db = Db.get_instance()
-    if username == 'vince' and password == 'beans':
+    sql = "SELECT username,password FROM users where username=\""+ username+"\" AND password = \""+password+"\""
+    tkn = db.fetchone(sql)
+    if tkn is not None:
         payload = {
             'username': username,
             'id': 100,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)
         }
-        #token = jwt.encode(payload, current_app.config['SECRET_KEY'], algorithm='HS256')
-        sql = "SELECT * FROM users"
-        token = db.fetchall(sql)
+        token = jwt.encode(payload, current_app.config['SECRET_KEY'], algorithm='HS256')
+        #current_app.config['token'] = token        
         return token
     return False
