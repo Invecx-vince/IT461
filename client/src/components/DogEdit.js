@@ -24,7 +24,7 @@ const DogEdit =({updateHandler}) =>{
             </div>
             <label>Name:</label>
             <input type="text" placeholder={dog.name} onChange={(e)=>{setName(e.target.value)}}/>
-            <button>update Details</button>
+            <button>Update Details</button>
         </form>
     );
 }
