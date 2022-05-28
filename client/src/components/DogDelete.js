@@ -6,9 +6,13 @@ const DogDelete = ({deleteHandler}) =>{
     const location = useLocation();
     const dog = location.state.dog;
     const formHandler = (e) => {
-        e.preventDefault();
-        deleteHandler(dog);
-        alert("Dog Record Deleted!");
+        if(document.activeElement.id=="yes"){
+            console.log()
+            e.preventDefault();
+            deleteHandler(dog);
+            alert("Dog Record Deleted!");
+        }
+
         navigate('/dogs');
     }
     return(
@@ -20,7 +24,8 @@ const DogDelete = ({deleteHandler}) =>{
             <div>
                 <label>Name: {dog.name}</label>
             </div>
-            <button>YES</button>
+            <button id="yes">YES</button>
+            <button id="no">NO</button>
         </form>
     );
 }

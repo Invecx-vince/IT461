@@ -17,6 +17,7 @@ import DogAdd from './components/DogAdd';
 import DogDetail from './components/DogDetail';
 import DogEdit from './components/DogEdit';
 import DogDelete from './components/DogDelete';
+import Cats from './components/Cats';
 
 const ROLES = {
   'User': 2001,
@@ -27,7 +28,9 @@ const ROLES = {
 function App() {
   
   const [dogs, setDogs] = useState([]);
-  const [url,setUrl] = useState('/dogs/?limit=3&offset=0')
+  const [url,setUrl] = useState('/dogs/?limit=3&offset=0');
+  const [cats, setCats] = useState([]);
+  const [url2,setUrl2] = useState('/cats/?limit=3&offset=0');
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
@@ -71,6 +74,48 @@ function App() {
     console.log(response.data);
     getDogs('/dogs/?limit=3&offset=0');
   } 
+//cats
+  const getCats = async (url, options=null) => {
+    setUrl(url);
+    try {
+        const response = await axiosPrivate.get(url, options);
+        console.log(response.data);
+        setCats(response.data);
+      } catch (err) {
+      console.error(err);
+          navigate('/login', { state: { from: location }, replace: true });
+      }
+    }
+  useEffect(() => {
+    const controller = new AbortController();
+    getCats('/cats/?limit=3&offset=0', {
+      signal: controller.signal
+      });
+      return () => {
+        controller.abort();
+      }
+  }, []);
+
+  const catAddHandler = async ({name}) =>{
+    console.log("DOG: ",name);
+    const response = await axiosPrivate.post('/cats/',JSON.stringify({id:0, name}));
+    console.log(response.data);
+    getCats('/cats/?limit=3&offset=0');
+  }
+
+  const catUpdateHandler = async (cat) =>{
+    console.log("DOG: ",cat);
+    const response = await axiosPrivate.put('/cats/',JSON.stringify(cat));
+    console.log(response.data);
+    getCats('/cats/?limit=3&offset=0');
+  }
+   const catDeleteHandler = async (cat) =>{
+    console.log("DOG:"+cat.id);
+    const response = await axiosPrivate.delete('/cats/'+cat.id);//,JSON.stringify(cat));
+    console.log(response.data);
+    getCats('/cats/?limit=3&offset=0');
+  } 
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -91,6 +136,11 @@ function App() {
           <Route path="/dogs/view/:id" element={<DogDetail />}/>
           <Route path="/dogs/edit/:id" element={<DogEdit updateHandler={dogUpdateHandler} />}/>
           <Route path="/dogs/delete/:id" element={<DogDelete deleteHandler={dogDeleteHandler} />}/>
+          <Route path="cats" element={<Cats cats={cats} getCats={getCats}/>} />
+          {/* <Route path="cats/create" element={<CatAdd addHandler={catAddHandler} />}/>
+          <Route path="/cats/view/:id" element={<CatDetail />}/>
+          <Route path="/cats/edit/:id" element={<CatEdit updateHandler={catUpdateHandler} />}/>
+          <Route path="/cats/delete/:id" element={<CatDelete deleteHandler={catDeleteHandler} />}/> */}
         </Route>
 
 
