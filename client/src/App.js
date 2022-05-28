@@ -97,20 +97,20 @@ function App() {
   }, []);
 
   const catAddHandler = async ({name}) =>{
-    console.log("DOG: ",name);
+    console.log("CAT: ",name);
     const response = await axiosPrivate.post('/cats/',JSON.stringify({id:0, name}));
     console.log(response.data);
     getCats('/cats/?limit=3&offset=0');
   }
 
   const catUpdateHandler = async (cat) =>{
-    console.log("DOG: ",cat);
+    console.log("CAT: ",cat);
     const response = await axiosPrivate.put('/cats/',JSON.stringify(cat));
     console.log(response.data);
     getCats('/cats/?limit=3&offset=0');
   }
    const catDeleteHandler = async (cat) =>{
-    console.log("DOG:"+cat.id);
+    console.log("CAT:"+cat.id);
     const response = await axiosPrivate.delete('/cats/'+cat.id);//,JSON.stringify(cat));
     console.log(response.data);
     getCats('/cats/?limit=3&offset=0');
