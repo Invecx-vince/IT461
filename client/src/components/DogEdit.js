@@ -13,8 +13,8 @@ const DogEdit =({updateHandler}) =>{
             return;
         }
         dog.name = name;
-        updateHandler({id:dog.id , name});
-        alert("New Dog record Added!");
+        updateHandler(dog);
+        alert("Dog Record Updated!\n name into: " + dog.name);
         navigate('/dogs');
     }
     return(
@@ -22,9 +22,9 @@ const DogEdit =({updateHandler}) =>{
             <div>
                 <label>ID: {dog.id}</label>
             </div>
-            <label>Name</label>
-            <input type="text" onChange={(e)=>{e.target.value}}></input>
-            <button>Add Dog</button>
+            <label>Name:</label>
+            <input type="text" placeholder={dog.name} onChange={(e)=>{setName(e.target.value)}}/>
+            <button>update Details</button>
         </form>
     );
 }

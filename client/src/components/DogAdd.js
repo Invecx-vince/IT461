@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useNavigate} from 'react-router-dom'
 
 const DogAdd = ({addHandler}) =>{
     const [name, setName] = useState('');
@@ -16,7 +17,7 @@ const DogAdd = ({addHandler}) =>{
     return(
         <form onSubmit={formHandler}>
             <label>Name</label>
-            <input type="text" onChange={(e)=>{e.target.value}}></input>
+            <input type="text" onChange={(e)=>{setName(e.target.value)}}/>
             <button>Add Dog</button>
         </form>
     );

@@ -11,7 +11,7 @@ Content-Type: application/json
 
 {
     "id": 0,
-    "name": "Blackie5"
+    "name": "Bruce"
 }
 
 
@@ -20,8 +20,8 @@ PUT {{host}}/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": 19,
-    "name": "Blackie"
+    "id": 0,
+    "name": "Bruce"
 }
 
 

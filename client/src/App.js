@@ -2,13 +2,15 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
 import Layout from './components/Layout';
-import Dogs from './components/Dogs';
 import Admin from './components/Admin';
 import Missing from './components/Missing';
 import Unauthorized from './components/Unauthorized';
 import Lounge from './components/Lounge';
 import LinkPage from './components/LinkPage';
 import RequireAuth from './components/RequireAuth';
+import { useState,useEffect } from 'react';
+import useAxiosPrivate from './hooks/useAxiosPrivate';
+import {useLocation,useNavigate} from "react-router-dom";
 import { Routes, Route } from 'react-router-dom';
 import Dogs from './components/Dogs';
 import DogAdd from './components/DogAdd';
@@ -56,12 +58,18 @@ function App() {
     getDogs('/dogs/?limit=3&offset=0');
   }
 
-  const dogUpdateHandler = async ({name}) =>{
-    console.log("DOG: ",name);
-    const response = await axiosPrivate.put('/dogs/',JSON.stringify({dog}));
+  const dogUpdateHandler = async (dog) =>{
+    console.log("DOG: ",dog);
+    const response = await axiosPrivate.put('/dogs/',JSON.stringify(dog));
     console.log(response.data);
     getDogs('/dogs/?limit=3&offset=0');
   }
+   const dogdeleteHandler = async ({name}) =>{
+    console.log("DOG: ",name);
+    const response = await axiosPrivate.delete();
+    console.log(response.data);
+    getDogs('/dogs/?limit=3&offset=0');
+  } 
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
