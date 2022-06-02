@@ -50,6 +50,9 @@ function App() {
     getDogs('/dogs/?limit=3&offset=0', {
       signal: controller.signal
       });
+    getCats('/cats/?limit=3&offset=0', {
+          signal: controller.signal
+          });
       return () => {
         controller.abort();
       }
@@ -75,10 +78,10 @@ function App() {
     getDogs('/dogs/?limit=3&offset=0');
   } 
 //cats
-  const getCats = async (url, options=null) => {
-    setUrl(url);
+  const getCats = async (url2, options=null) => {
+    setUrl2(url2);
     try {
-        const response = await axiosPrivate.get(url, options);
+        const response = await axiosPrivate.get(url2, options);
         console.log(response.data);
         setCats(response.data);
       } catch (err) {
@@ -86,7 +89,7 @@ function App() {
           navigate('/login', { state: { from: location }, replace: true });
       }
     }
-  useEffect(() => {
+  /* useEffect(() => {
     const controller = new AbortController();
     getCats('/cats/?limit=3&offset=0', {
       signal: controller.signal
@@ -94,9 +97,9 @@ function App() {
       return () => {
         controller.abort();
       }
-  }, []);
+  }, []); */
 
-  const catAddHandler = async ({name}) =>{
+  /* const catAddHandler = async ({name}) =>{
     console.log("CAT: ",name);
     const response = await axiosPrivate.post('/cats/',JSON.stringify({id:0, name}));
     console.log(response.data);
@@ -114,7 +117,7 @@ function App() {
     const response = await axiosPrivate.delete('/cats/'+cat.id);//,JSON.stringify(cat));
     console.log(response.data);
     getCats('/cats/?limit=3&offset=0');
-  } 
+  }  */
 
   return (
     <Routes>
