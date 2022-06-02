@@ -54,6 +54,7 @@ const Dogs = ({dogs, getDogs}) => {
                     </>
                 ) : <p>No dogs to display</p>
             }
+            <Link to="/">Return Home</Link>
         </article>
     );
 };

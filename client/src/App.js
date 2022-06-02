@@ -18,6 +18,10 @@ import DogDetail from './components/DogDetail';
 import DogEdit from './components/DogEdit';
 import DogDelete from './components/DogDelete';
 import Cats from './components/Cats';
+import CatAdd from './components/CatAdd';
+import CatDetail from './components/CatDetail';
+import CatEdit from './components/CatEdit';
+import CatDelete from './components/CatDelete';
 
 const ROLES = {
   'User': 2001,
@@ -44,15 +48,15 @@ function App() {
       console.error(err);
           navigate('/login', { state: { from: location }, replace: true });
       }
-    }
+  }
   useEffect(() => {
     const controller = new AbortController();
-    getDogs('/dogs/?limit=3&offset=0', {
+    /* getDogs('/dogs/?limit=3&offset=0', {
+      signal: controller.signal
+      }); */
+    getCats('/cats/?limit=3&offset=0', {
       signal: controller.signal
       });
-    getCats('/cats/?limit=3&offset=0', {
-          signal: controller.signal
-          });
       return () => {
         controller.abort();
       }
@@ -99,7 +103,7 @@ function App() {
       }
   }, []); */
 
-  /* const catAddHandler = async ({name}) =>{
+  const catAddHandler = async ({name}) =>{
     console.log("CAT: ",name);
     const response = await axiosPrivate.post('/cats/',JSON.stringify({id:0, name}));
     console.log(response.data);
@@ -117,7 +121,7 @@ function App() {
     const response = await axiosPrivate.delete('/cats/'+cat.id);//,JSON.stringify(cat));
     console.log(response.data);
     getCats('/cats/?limit=3&offset=0');
-  }  */
+  } 
 
   return (
     <Routes>
@@ -140,10 +144,10 @@ function App() {
           <Route path="/dogs/edit/:id" element={<DogEdit updateHandler={dogUpdateHandler} />}/>
           <Route path="/dogs/delete/:id" element={<DogDelete deleteHandler={dogDeleteHandler} />}/>
           <Route path="cats" element={<Cats cats={cats} getCats={getCats}/>} />
-          {/* <Route path="cats/create" element={<CatAdd addHandler={catAddHandler} />}/>
+          <Route path="cats/create" element={<CatAdd addHandler={catAddHandler} />}/>
           <Route path="/cats/view/:id" element={<CatDetail />}/>
           <Route path="/cats/edit/:id" element={<CatEdit updateHandler={catUpdateHandler} />}/>
-          <Route path="/cats/delete/:id" element={<CatDelete deleteHandler={catDeleteHandler} />}/> */}
+          <Route path="/cats/delete/:id" element={<CatDelete deleteHandler={catDeleteHandler} />}/>
         </Route>
 
 

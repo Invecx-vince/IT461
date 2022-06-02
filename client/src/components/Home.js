@@ -21,6 +21,7 @@ const Home = () => {
             <p>You are logged in!</p>
             <br />
             <Link to="/dogs">Go to the Dogs page</Link>
+            <br />
             <Link to="/cats">Go to the Cats page</Link>
             <br />
             <div className="flexGrow">
