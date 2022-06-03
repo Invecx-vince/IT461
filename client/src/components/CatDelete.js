@@ -1,12 +1,12 @@
-import {useState} from "react";
+//import {useState} from "react";
 import {useNavigate,useLocation} from 'react-router-dom'
 const CatDelete = ({deleteHandler}) =>{
-    const [name, setName] = useState('');
+    //const [name, setName] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
     const cat = location.state.cat;
     const formHandler = (e) => {
-        if(document.activeElement.id=="yes"){
+        if(document.activeElement.id==="yes"){
             console.log()
             e.preventDefault();
             deleteHandler(cat);

@@ -54,6 +54,7 @@ const Cats = ({cats, getCats}) => {
                     </>
                 ) : <p>No cats to display</p>
             }
+            <br/>
             <Link to="/">Return Home</Link>
         </article>
     );
