@@ -29,6 +29,7 @@ class CatModel():
 
     def read(self, filters=None, count_only=False):
         db = Db.get_instance()
+        db.connect().ping()
         fields = ['*']
         offset = 0
         limit = 5
@@ -51,7 +52,8 @@ class CatModel():
         cols = 'COUNT(*) AS total' if count_only else ','.join(fields)
         sql = "SELECT " + cols + " FROM cats"
         if not count_only:
-            sql += " ORDER BY name LIMIT " + str(offset) + ", " + str(limit)
+            sql += " ORDER BY id LIMIT " + str(offset) + ", " + str(limit)
+        db.connect().ping()
         if count_only:
             row = db.fetchone(sql)
             return row['total'] if row else 0

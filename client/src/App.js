@@ -51,9 +51,9 @@ function App() {
   }
   useEffect(() => {
     const controller = new AbortController();
-    /* getDogs(url, {
+    getDogs(url, {
       signal: controller.signal
-      }); */
+      });
     getCats(url2, {
       signal: controller.signal
       });

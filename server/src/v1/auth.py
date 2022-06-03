@@ -20,6 +20,7 @@ def verify_token(token):
 def login(username, password):
     # TODO: use the database to verify the username and password
     db = Db.get_instance()
+    db.connect().ping()
     sql = "SELECT username,password FROM users where username=\""+ username+"\" AND password = \""+password+"\""
     tkn = db.fetchone(sql)
     if tkn is not None:
